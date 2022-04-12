@@ -1,0 +1,851 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/",
+    "type": "object",
+    "title": "The Tribune Mobile section feed",
+    "required": [
+        "layout",
+        "name",
+        "regions",
+        "tracking",
+        "last_modified",
+        "lmt",
+        "checksum"
+    ],
+    "properties": {
+        "layout": {
+            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/layout",
+            "type": "string",
+            "title": "The section layout code",
+            "description": "Section layout name/code in pagebuilder. Parsed but not used in mobile. ",
+            "examples": ["3 Level Right Rail - Custom Block"]
+        },
+        "name": {
+            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/name",
+            "type": "string",
+            "title": "section layout name/code in pagebuilder.",
+            "description": "Section laout name/code in pagebuilder. used for tracking and analytics. ",
+            "examples": ["3 Level Right Rail - Custom Block"]
+        },
+        "outputType": {
+            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/outputType",
+            "type": "string",
+            "title": "The output type",
+            "description": "The output type used in pagebuilder. outputType=xxx. It is not used in mobile, but good to dispaly in feed.",
+            "examples": ["jsonMobile"]
+        },
+        "regions": {
+            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/regions",
+            "type": "object",
+            "title": "The region (or the region list) in the layout. ",
+            "description": "The top level region container for page content. Not sure mobile can take multiple regions for section front or not. need verify from mobile team. If mobile only can take one region, then the region will be 'main-content'",
+            "required": ["main-content"],
+            "properties": {
+                "main-content": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/regions/properties/main-content",
+                    "type": "object",
+                    "title": "The main-content region",
+                    "description": "For now it has hard coded region name (assume we only have one region). we need apply all page layout regions into this region bucket.",
+                    "required": [
+                        "location",
+                        "items"
+                    ],
+                    "properties": {
+                        "location": {
+                            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/regions/properties/main-content/properties/location",
+                            "type": "string",
+                            "title": "The region location name",
+                            "description": "The current region name. ",
+                            "examples": ["main-content"]
+                        },
+                        "items": {
+                            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/regions/properties/main-content/properties/items",
+                            "type": "array",
+                            "title": "The items Array",
+                            "description": "An array of chains(list of blocks with 'chain' wrapper) and ads. ",
+                            "items": {
+                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/regions/properties/main-content/properties/items/items",
+                                "anyOf": [
+                                    {
+                                        "$ref": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad",
+                                        "description": "Mobile Ad element."
+                                    },
+                                    {
+                                        "$ref": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/chain",
+                                        "description": "PageBuilder Chain element."
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "tracking": {
+            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking",
+            "type": "object",
+            "title": "The tracking parameter list",
+            "description": "This tracking list parameters are for tracking and content refresh indication.",
+            "default": {},
+            "required": [
+                "author",
+                "blogname",
+                "channel",
+                "columnname",
+                "commercial_node",
+                "content_category",
+                "content_id",
+                "content_type",
+                "headline",
+                "hierarchy",
+                "news_or_commercial",
+                "op_ranking",
+                "page_name",
+                "page_num",
+                "page_type",
+                "platform",
+                "published",
+                "section",
+                "sectionfront",
+                "site",
+                "source",
+                "story_type",
+                "subsection",
+                "track_scrolling"
+            ],
+            "properties": {
+                "author": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/author",
+                    "type": "string",
+                    "title": "The section author",
+                    "description": "The section is placeholder, there is not author can be identifed, so keep as empty string. Parsed but not used in mobile.",
+                    "default": ""
+                },
+                "blogname": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/blogname",
+                    "type": "string",
+                    "title": "The blog name",
+                    "description": "This is not applicable for section. so keep as empty string. Parsed but not used in mobile",
+                    "default": ""
+                },
+                "channel": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/channel",
+                    "type": "string",
+                    "title": "The section channel name.",
+                    "description": "Could not find mapping for this directly, so please use 'tronc'-<last section path>, last section path for homesection is 'homepage'. Pared but not used in mobile.",
+                    "examples": ["tronc-news"]
+                },
+                "columnname": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/columnname",
+                    "type": "string",
+                    "title": "The colum nname",
+                    "description": "This is not applicable for section, keep as empty string. Parsed but not used in mobile",
+                    "default": ""
+                },
+                "commercial_node": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/commercial_node",
+                    "type": "string",
+                    "title": "The commercial node",
+                    "description": "No directly mapping can be found. Use current site main domain (no wwww). Used as tracking in mobile.",
+                    "examples": ["chicagotribune.com"]
+                },
+                "content_category": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/content_category",
+                    "type": "string",
+                    "title": "The content category",
+                    "description": "Ths is not applicable for section. keep as empty string. Parsed but not used in mobile.",
+                    "default": ""
+                },
+                "content_id": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/content_id",
+                    "type": "string",
+                    "title": "The content id",
+                    "description": "Ths is not applicable for section. keep as empty string. Parsed but not used in mobile.",
+                    "default": ""
+                },
+                "content_type": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/content_type",
+                    "type": "string",
+                    "title": "The content type",
+                    "description": "No directly mapping can be found. user the last section path in url. homesection apply 'homepage'. Parsed but not used in mobile.",
+                    "examples": ["news"]
+                },
+                "headline": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/headline",
+                    "type": "string",
+                    "title": "The section headline",
+                    "description": "This is not applicable for section. keep as empty string. Parsed but not used in mobile.",
+                    "default": ""
+                },
+                "hierarchy": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/hierarchy",
+                    "type": "string",
+                    "title": "The URL hierarchy",
+                    "description": "The full section path for current secitonm not backslash at end. Homesection is '/homepage'.",
+                    "examples": ["/news/local"]
+                },
+                "news_or_commercial": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/news_or_commercial",
+                    "type": "string",
+                    "title": "The section purpose",
+                    "description": "I assume it is used to id current section is for brand content or not, Currently not mapping defined. always keep as 'News' for now. Not used in mobile.",
+                    "default": "News"
+                },
+                "op_ranking": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/op_ranking",
+                    "type": "string",
+                    "title": "The op ranking",
+                    "description": "No match mapping. always keep as 'no sentiment - no ideology', Parsed but not used in mobile.",
+                    "default": ""
+                },
+                "page_name": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/page_name",
+                    "type": "string",
+                    "title": "The page name",
+                    "description": "Could not find mapping for this directly, so please use 'tronc'-<last section path>, last section path for homesection is 'homepage'. Pared but not used in mobile.",
+                    "examples": ["tronc-news"]
+                },
+                "page_num": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/page_num",
+                    "type": "string",
+                    "title": "The page number",
+                    "description": "No match mapping. Always keep as empty string. Parsed but not used in mobile.",
+                    "default": ""
+                },
+                "page_type": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/page_type",
+                    "type": "string",
+                    "title": "The page type",
+                    "description":"No match mapping. Always keep as empty string. Parsed but not used in mobile.",
+                    "default": ""
+                },
+                "platform": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/platform",
+                    "type": "string",
+                    "title": "The source of platform",
+                    "description": "No match mapping. Always keep as 'pagebuilder'. Used in Mobile.",
+                    "default": "pagebuilder"
+                },
+                "published": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/published",
+                    "type": "string",
+                    "title": "The published date?",
+                    "description": "I think it is not applicable for section. Alway keep as empty string. Used in Mobile.",
+                    "default": ""
+                },
+                "section": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/section",
+                    "type": "string",
+                    "title": "The section schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": ""
+                },
+                "sectionfront": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/sectionfront",
+                    "type": "string",
+                    "title": "The sectionfront?",
+                    "description": "Could not find match. Empty in exist feeds. so we always keep as empty string. Used in Mobile",
+                    "default": ""
+                },
+                "site": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/site",
+                    "type": "string",
+                    "title": "The site",
+                    "description": "Full site domain",
+                    "examples": ["www.chicagotribune.com"]
+                },
+                "source": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/source",
+                    "type": "string",
+                    "title": "The source",
+                    "description": "This is not applicable for section. keep as empty string. Parsed but not used in mobile.",
+                    "default": ""
+                },
+                "story_type": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/story_type",
+                    "type": "string",
+                    "title": "The story type",
+                    "description": "This is not applicable for section. keep as empty string. Parsed but not used in mobile.",
+                    "default": ""
+                },
+                "subsection": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/subsection",
+                    "type": "string",
+                    "title": "The subsection path",
+                    "description": "The last section path in url.",
+                    "examples": ["local"]
+                },
+                "track_scrolling": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/tracking/properties/track_scrolling",
+                    "type": "string",
+                    "title": "The track_scrolling enable",
+                    "description": "No match mapping. always return 'false' string. Not used in mobile.",
+                    "default": "false"
+                }
+            }
+        },
+        "last_modified": {
+            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/last_modified",
+            "type": "string",
+            "title": "The last_modified date",
+            "description": "The last_modified date for current section. Used in Mobile.",
+            "examples": ["2022-03-15T18:55:00.000Z"]
+        },
+        "lmt": {
+            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/lmt",
+            "type": "string",
+            "title": "The lmt",
+            "description": "The last modifed date in week day format based on utc timezone. Used in Mobile.",
+            "examples": ["Tue, 15 Mar 2022 18:55:00 UTC"]
+        },
+        "checksum": {
+            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/checksum",
+            "type": "string",
+            "title": "The checksum code",
+            "description": "section content checksum code. it should be updated based on the feed content checksum. Used in Mobile.",
+            "examples": ["ad5740d2d9f3b71e9fbe86144174b0ff"]
+        }
+    },
+    "definitions": {
+        "label": {
+            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/label",
+            "type": "object",
+            "title": "The label element",
+            "description": "A label element can be used in chain and homepage-story items. Chain label: This is not part of fusion yet. furture ticket should add label for chain. this is not required element in chain element.",
+            "optional": true,
+            "required": [
+                "text",
+                "label_alignment",
+                "label_style"
+            ],
+            "properties": {
+                "text": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/label/properties/text",
+                    "type": "string",
+                    "title": "The label text",
+                    "description": "Inside Chain: The chain label text is block header if it exists .",
+                    "default": ""
+                },
+                "label_alignment": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/label/properties/label_alignment",
+                    "type": "string",
+                    "title": "The label_alignment",
+                    "description": "Inside Chain: The label_alignment should be part of chain configuration. default to 'left'",
+                    "default": "left"
+                },
+                "label_style": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/label/properties/label_style",
+                    "type": "string",
+                    "title": "The label_style",
+                    "description": "Inside Chain: label style should be part of block configuration. if not configured, default to 'label label-kicker'",
+                    "examples": ["label label-kicker"]
+                },
+                "label_color": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/label/properties/label_color",
+                    "type": "string",
+                    "title": "The label_color",
+                    "description": "Inside Chain: this is not required for chain. this element should not display.",
+                    "optional": true,
+                    "examples": ["#00000"]
+                }
+            }
+        },
+        "homepage-story":   {
+            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story",
+            "type": "object",
+            "title": "homepage story",
+            "description": "Main content element in pagebuilder block (feature)",
+            "required": [
+                "border_bottom_style",
+                "border_bottom_width",
+                "item_type",
+                "feature_name",
+                "text_alignment",
+                "items"
+            ],
+            "properties": {
+                "border_bottom_style": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/border_bottom_style",
+                    "type": "string",
+                    "title": "The border_bottom_style",
+                    "description": "Always display as string 'hairline'.",
+                    "default": "hairline"
+                },
+                "border_bottom_width": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/border_bottom_width",
+                    "type": "string",
+                    "title": "The border_bottom_width",
+                    "description": "Always display as string '100-pct'.",
+                    "default": "100-pct"
+                },
+                "item_type": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/item_type",
+                    "type": "string",
+                    "title": "The item_type",
+                    "description": "The item type of homepage-story element always as 'homepage/story'.",
+                    "default": "homepage/story"
+                },
+                "feature_name": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/feature_name",
+                    "type": "string",
+                    "title": "The feature_name",
+                    "description": "This is lowercase content item title with '-' replace space.",
+                    "examples": ["illinois-house-democrats-unveil-1-3-billion-tax-relief-plan-45-7-billion-budget-with-2-days-to-go-in-spring-session"]
+                },
+                "text_alignment": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/text_alignment",
+                    "type": "string",
+                    "title": "The text_alignment",
+                    "description": "it should be allow left and center based on mobile team, however, currently there is no match in pagebuilder for this. by default we show 'left'.",
+                    "default": "left"
+                },
+                "items": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items",
+                    "type": "array",
+                    "title": "The current item detail array",
+                    "description": "Based on current feed structure, there only one item for each array.",
+                    "default": [],
+                    "items": {
+                        "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items",
+                        "oneOf": [
+                            {
+                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item",
+                                "type": "object",
+                                "title": "item details",
+                                "description": "item details.",
+                                "required": [
+                                    "headline",
+                                    "link",
+                                    "source",
+                                    "sub_item_type",
+                                    "media"
+                                ],
+                                "properties": {
+                                    "commercial_node": {
+                                        "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/commercial_node",
+                                        "type": "string",
+                                        "title": "The commercial_node",
+                                        "description": "it should be pagebuilder_path_for_native_apps for current article section path. if content's CURRENT section does not contain or current content does not constructed by api, return as empty string. for sub_item_type as secondary items, this element should not displayed.",
+                                        "optional": true
+                                    },
+                                    "headline": {
+                                        "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/headline",
+                                        "type": "object",
+                                        "title": "The headline",
+                                        "description": "The current article's mobile headline rendering details",
+                                        "required": [
+                                            "alignment",
+                                            "font_style",
+                                            "size",
+                                            "text"
+                                        ],
+                                        "properties": {
+                                            "alignment": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/headline/properties/alignment",
+                                                "type": "string",
+                                                "title": "The Headline alignment",
+                                                "description": "based on block configuration, if no configuration, default to left.",
+                                                "default": "left"
+                                            },
+                                            "font_style": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/headline/properties/font_style",
+                                                "type": "string",
+                                                "title": "The headline font_style",
+                                                "description": "Explain seprately in different doc. possible values: normal-style, thin-style and hightlight-style ",
+                                                "examples": ["normal-style"]
+                                            },
+                                            "size": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/headline/properties/size",
+                                                "type": "string",
+                                                "title": "The headline size ",
+                                                "description": "Explain seprately in different doc. possibel values: small, normal, x-small and xx-small",
+                                                "examples": ["small"]
+                                            },
+                                            "text": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/headline/properties/text",
+                                                "type": "string",
+                                                "title": "The headline text",
+                                                "description": "Current article headline text. Follow block(feature) logic to display mobile version of headline or not."
+                                            }
+                                        }
+                                    },
+                                    "link": {
+                                        "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/link",
+                                        "type": "object",
+                                        "title": "Current article linking info",
+                                        "description": "Current article url linking details",
+                                        "required": [
+                                            "last_modified",
+                                            "type",
+                                            "url",
+                                            "access_level"
+                                        ],
+                                        "properties": {
+                                            "last_modified": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/link/properties/last_modified",
+                                                "type": "string",
+                                                "title": "The article last_modified date",
+                                                "description": "The artilce last modified date (content.last_updated_date). If item is configurated directly on block, then use block create date. Date format can based on the example.",
+                                                "examples": ["2022-04-06T23:01:45.695Z"]
+                                            },
+                                            "type": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/link/properties/type",
+                                                "type": "string",
+                                                "title": "The article type",
+                                                "description": "The article type (content.type). if item is directly configured in block, default to 'web'.",
+                                                "examples": ["story"]
+                                            },
+                                            "url": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/link/properties/url",
+                                                "type": "string",
+                                                "title": "The article url",
+                                                "description": "The article website url (content.website_url).",
+                                                "default": ""
+                                            },
+                                            "access_level": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/link/properties/access_level",
+                                                "type": "string",
+                                                "title": "The access_level",
+                                                "description": "current article access level. possible value: meteredThenPaid, freeForAll, meteredThenFree, paidOnly. In our mapping, meteredThenPaid is metered, else render as empty string. metered logic can be find in jsonld isAccessibleForFree )",
+                                                "examples": ["meteredThenPaid"]
+                                            }
+                                        }
+                                    },
+                                    "source": {
+                                        "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/source",
+                                        "type": "string",
+                                        "title": "The source name",
+                                        "description": "Current article source namme (content.source.name)",
+                                        "examples":  ["Hartford Courant"]
+                                    },
+                                    "sub_item_type": {
+                                        "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/sub_item_type",
+                                        "type": "string",
+                                        "title": "The article display level ",
+                                        "description": "The article display level. possible value: primary, secondary. Set this to secondary if current item created by related links in block, else set as primary. ",
+                                        "examples": ["primary"]
+                                    },
+                                    "media": {
+                                        "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/media",
+                                        "type": "object",
+                                        "title": "The article media",
+                                        "description": "There could be video and photo as media, currently there is no example for video rendering, so we only map article photo, this is based on current article content.promo_items.basic ",
+                                        "required": [
+                                            "art_position",
+                                            "art_width",
+                                            "aspect_ratio",
+                                            "caption_content",
+                                            "caption_size",
+                                            "height",
+                                            "media_type",
+                                            "url",
+                                            "width"
+                                        ],
+                                        "optional": true,
+                                        "properties": {
+                                            "art_position": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/media/properties/art_position",
+                                                "type": "string",
+                                                "title": "The art_position",
+                                                "description": "Media position is based on current block(feature) configuration. all possible value: high, low, left, right, left-of-blurb, left-of-headline, right-of-headline, right-of-blurb, below-headline. current mapping: Above text(high), Blow text(low), Right of text(right-of-headline), Left of text(left-of-headline).",
+                                                "default": ""
+                                            },
+                                            "art_width": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/media/properties/art_width",
+                                                "type": "integer",
+                                                "title": "The art_width",
+                                                "description": "Based on current feed, possibe logic is: meida above or below text, set to 12. single item block default to 4, list item block default to 3",
+                                                "default": 3
+                                            },
+                                            "aspect_ratio": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/media/properties/aspect_ratio",
+                                                "type": "number",
+                                                "title": "The aspect_ratio",
+                                                "description": "This come from block configuration on media ratio if any, else default to 1. possible value: 1 (1x1), 1.3(4x3), 1.7(16x9), 3 (?)",
+                                                "default": 1
+                                            },
+                                            "caption_content": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/media/properties/caption_content",
+                                                "type": "null",
+                                                "title": "The caption_content",
+                                                "description": "Media caption (content.promo_items.basic.caption). null if media is not from content API",
+                                                "examples": ["The 10U Vikings team dominated the Miami Gardens Ravens 25-0 to take the FYFL Super Bowl title.\r\rUser Upload Caption: *"],
+                                                "default": null
+                                            },
+                                            "caption_size": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/media/properties/caption_size",
+                                                "type": "string",
+                                                "title": "The caption_size ",
+                                                "description": "Current feed only render caption_size as 'small'.",
+                                                "default": "small"
+                                            },
+                                            "height": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/media/properties/height",
+                                                "type": "integer",
+                                                "title": "The media height",
+                                                "description": "Media height (content.promo_items.basic.height). null if media is not from content API",
+                                                "default": null
+                                            },
+                                            "media_type": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/media/properties/media_type",
+                                                "type": "string",
+                                                "title": "The media_type",
+                                                "description": "media type can be posttv, youtube or featured, currently we only map photo which rendered as 'featured' ",
+                                                "examples": ["featured"]
+                                            },
+                                            "url": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/media/properties/url",
+                                                "type": "string",
+                                                "title": "The meida url",
+                                                "description": "Media url(content.promo_items.basic.url).",
+                                                "examples": ["https://cloudfront-us-east-1.images.arcpublishing.com/tronc/AXOQXBTIMNFRFDD2N44P5OZEWY.gif"]
+                                            },
+                                            "width": {
+                                                "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/items/items/anyOf/item/properties/media/properties/width",
+                                                "type": "integer",
+                                                "title": "The media width",
+                                                "description": "Media wdith (content.promo_items.basic.width). null if media is not from content API",
+                                                "default": null
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "column": {
+            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/column",
+            "type": "object",
+            "title": "column element",
+            "description": "Column element is subcomponment of Chain, each Chain hold one or more columns",
+            "required": [
+                "item_type",
+                "items"
+            ],
+            "properties": {
+                "item_type": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/column/properties/item_type",
+                    "type": "string",
+                    "title": "The item_type",
+                    "description": "column item type is always be 'column'.",
+                    "default": "column"
+                },
+                "items": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/column/properties/items",
+                    "type": "array",
+                    "title": "Blocks (features)",
+                    "description": "An array of content elements in current block(feature).",
+                    "items": {
+                        "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>#/definitions/column/properties/items/items",
+                        "anyOf": [
+                            {
+                                "$ref": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story",
+                                "description": "Main content elements."
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "chain": {
+            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/chain",
+            "type": "object",
+            "title": "Chain item",
+            "description": "An item contain pagebuilder feature(block). This is not chain in pagebuilder.",
+            "required": [
+                "item_type",
+                "border_bottom_style",
+                "border_bottom_width",
+                "items",
+                "chain_name"
+            ],
+            "properties": {
+                "item_type": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/chain/properties/item_type",
+                    "type": "string",
+                    "title": "The item_type",
+                    "description": "The item type for chain item always rendered as 'chain'.",
+                    "default": "chain"
+                },
+                "border_bottom_style": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/chain/properties/border_bottom_style",
+                    "type": "string",
+                    "title": "The border_bottom_style",
+                    "description": "Always display as string 'hairline'.",
+                    "default": "hairline"
+                },
+                "border_bottom_width": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/chain/properties/border_bottom_width",
+                    "type": "string",
+                    "title": "The border_bottom_width",
+                    "description": "Always display as string '100-pct'.",
+                    "default": "100-pct"
+                },
+                "chain_name": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/chain/properties/chain_name",
+                    "type": "string",
+                    "title": "The chain_name",
+                    "description": "The name(label) of current block or feature.",
+                    "examples": ["lists/featured-story-list"]
+                },
+                "label": {
+                    "$ref": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/label",
+                    "description": "A label element.",
+                    "optional": true
+                },
+                "items": {
+                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/chain/properties/items",
+                    "description": "Each Chain contains one or more column elements.",
+                    "oneOf": [
+                        {
+                            "$ref": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/column",
+                            "description": "An column element."
+                        }
+                    ]
+                }
+            }
+        },
+        "ad": {
+            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad",
+                "type": "object",
+                "title": "Ad item",
+                "description": "A item contain an Ad. This item will be rendered if an ad block appeared in rendering sequence on current section.",
+                "required": [
+                    "border_bottom_style",
+                    "border_bottom_width",
+                    "feature_name",
+                    "item_type",
+                    "items"
+                ],
+                "properties": {
+                    "border_bottom_style": {
+                        "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/border_bottom_style",
+                        "type": "string",
+                        "title": "The border_bottom_style",
+                        "description": "Always display as string 'hairline'.",
+                        "default": "hairline"
+                    },
+                    "border_bottom_width": {
+                        "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/border_bottom_width",
+                        "type": "string",
+                        "title": "The border_bottom_width",
+                        "description": "Always display as string '100-pct'.",
+                        "default": "100-pct"
+                    },
+                    "feature_name": {
+                        "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/feature_name",
+                        "type": "string",
+                        "title": "The ad feature_name name",
+                        "description": "The name always under format 'ad-<n>-do-not-move' <n> is an incremental number base on mobile ad appearance on the current section. If there already has n ad items rendred on current section, this <n> should be n-1. The <n> for the 1st ad item, should be 0.",
+                        "examples": ["ad-2-do-not-move"]
+                    },
+                    "item_type": {
+                        "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/item_type",
+                        "type": "string",
+                        "title": "The item_type",
+                        "description": "The item type for ad item always rendered as 'ad/flex-app'.",
+                        "default": "ad/flex-app"
+                    },
+                    "items": {
+                        "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/items",
+                        "type": "array",
+                        "title": "The Ad item definition array.",
+                        "description": "The orginal design may have more than more Ad definitions for Ad item. However, in current case, we only have one item in this Ad definition array.",
+                        "items": {
+                            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/items/items",
+                            "anyOf": [
+                                {
+                                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/items/items/anyOf/n",
+                                    "type": "object",
+                                    "title": "The Ad item definition",
+                                    "description": "Ad item detail rendering attributes.",
+                                    "required": [
+                                        "ad_delivery",
+                                        "ad",
+                                        "commercial_path",
+                                        "page_url",
+                                        "ad_properties"
+                                    ],
+                                    "properties": {
+                                        "ad_delivery": {
+                                            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/items/items/anyOf/n/properties/ad_delivery",
+                                            "type": "string",
+                                            "title": "The ad_delivery",
+                                            "description": "The ad delivery always rendered as string 'vi'.",
+                                            "default": "vi"
+                                        },
+                                        "ad": {
+                                            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/items/items/anyOf/n/properties/ad",
+                                            "type": "string",
+                                            "title": "The ad rendering destination.",
+                                            "description": "The ad rendering destination always rendered as string 'flex-app'.",
+                                            "default": "flex-app"
+                                        },
+                                        "commercial_path": {
+                                            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/items/items/anyOf/n/properties/commercial_path",
+                                            "type": "string",
+                                            "title": "The commercial_path",
+                                            "description": "The commerical path is current section path.Home section is '/hp'",
+                                            "examples": ["/news/local"]
+                                        },
+                                        "page_url": {
+                                            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/items/items/anyOf/n/properties/page_url",
+                                            "type": "string",
+                                            "title": "The page_url",
+                                            "description": "display current full page url.",
+                                            "examples": ["https://www.chicagotribune.com/news/local"]
+                                        },
+                                        "ad_properties": {
+                                            "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/regions//definitions/chian/properties/items/items/anyOf/n/properties/ad_properties",
+                                            "type": "object",
+                                            "title": "The ad_properties",
+                                            "description": "Ad rendering properties",
+                                            "required": [
+                                                "csnd",
+                                                "design",
+                                                "pos",
+                                                "ptype"
+                                            ],
+                                            "properties": {
+                                                "csnd": {
+                                                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/items/items/anyOf/n/properties/ad_properties/properties/csnd",
+                                                    "type": "string",
+                                                    "title": "The csnd value",
+                                                    "description": "This value always rendered as 'ptsf_dapparc_p<n>_uaa'. <n> is an incremental number base on mobile ad appearance on the current section. This <n> is defined differently than ad feature name. If there already has n ad items rendred on current section, this <n> should be n. The <n> for the 1st ad item, should be 1.",
+                                                    "examples": ["ptsf_dapparc_p3_uaa"]
+                                                },
+                                                "design": {
+                                                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/items/items/anyOf/n/properties/ad_properties/properties/design",
+                                                    "type": "string",
+                                                    "title": "The design value",
+                                                    "description": "The design value always rendered as 'apparc' for section front.",
+                                                    "default": "apparc"
+                                                },
+                                                "pos": {
+                                                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/items/items/anyOf/n/properties/ad_properties/properties/pos",
+                                                    "type": "string",
+                                                    "title": "The pos value",
+                                                    "description": "The pos value always rendered as integer string, same logic for <n> defined in csnd value.",
+                                                    "examples": ["3"]
+                                                },
+                                                "ptype": {
+                                                    "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/ad/properties/items/items/anyOf/n/properties/ad_properties/properties/ptype",
+                                                    "type": "string",
+                                                    "title": "The ptype value",
+                                                    "description": "This is based on section meta value ptype, default is 'sf' for section.",
+                                                    "default": "sf"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+}
