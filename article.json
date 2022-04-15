@@ -1,0 +1,1503 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://www.chicagotribune.com/arcio/classic-content/?url=<articleurl>",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "required": [
+        "contenturl",
+        "blogname",
+        "published",
+        "title",
+        "canonicalurl",
+        "socialImage",
+        "sourcecategory",
+        "sourcesection",
+        "sourcesubsection",
+        "sourceurl",
+        "sourceid",
+        "slug",
+        "omniture",
+        "showdisplaydate",
+        "publishedurl",
+        "type",
+        "id",
+        "lmt",
+        "shareurl",
+        "adkey",
+        "adProperties",
+        "accessLevel"
+    ],
+    "properties": {
+        "contenturl": {
+            "$id": "#/properties/contenturl",
+            "type": "string",
+            "title": "The article url",
+            "description": "Current article url",
+            "examples": [ "https://www.chicagotribune.com/news/criminal-justice/ct-ald-daniel-solis-deferred-prosecution-agreement-burke-madigan-20220412-tnefkijdonf77k4m3y5crm4nt4-story.html"]
+        },
+        "blogname": {
+            "$id": "#/properties/blogname",
+            "type": "string",
+            "title": "The blogname",
+            "description": "the parent section path. parsed but not used in mobile, if artiicle path to root, set to empty string.",
+            "default": "",
+            "examples": [ "news"]
+        },
+        "published": {
+            "$id": "#/properties/published",
+            "type": "integer",
+            "title": "The published date",
+            "description": "The article published date in iso interger.",
+            "examples": [1649791430385]
+        },
+        "title": {
+            "$id": "#/properties/title",
+            "type": "string",
+            "title": "The title",
+            "description": "content.headlines.basic. Current article full title based on article detail page rendering logic.",
+            "examples": ["After three years under wraps, ex-Ald. Daniel Solis’ unprecedented deal with the feds has gone public "]
+        },
+        "canonicalurl": {
+            "$id": "#/properties/canonicalurl",
+            "type": "string",
+            "title": "The canonical url",
+            "description": "Current article canonical url",
+            "examples": ["/news/criminal-justice/ct-ald-daniel-solis-deferred-prosecution-agreement-burke-madigan-20220412-tnefkijdonf77k4m3y5crm4nt4-story.html"]
+        },
+        "socialImage": {
+            "$id": "#/properties/socialImage",
+            "type": "string",
+            "title": "The social Image url",
+            "description": "Cannot find logic behind this. I assume we can use og:image logic. if not possible, use empty string as default.",
+            "default": ""
+        },
+        "sourcecategory": {
+            "$id": "#/properties/sourcecategory",
+            "type": "string",
+            "title": "The source category",
+            "description": "Cannot find logic behind this. Set empty string as default. no usage in mobile",
+            "default": ""
+        },
+        "sourcesection": {
+            "$id": "#/properties/sourcesection",
+            "type": "string",
+            "title": "The source section",
+            "description": "Current article parent section, if artiicle path to root, set to empty string.",
+            "examples": ["news"]
+        },
+        "sourcesubsection": {
+            "$id": "#/properties/sourcesubsection",
+            "type": "string",
+            "title": "The sourcesubsection",
+            "description": "Cannot fine logic hind this. Set empty string as default. no usage in mobile",
+            "default": ""
+        },
+        "sourceurl": {
+            "$id": "#/properties/sourceurl",
+            "type": "string",
+            "title": "The source url",
+            "description": "same logic as contenturl",
+            "examples": ["https://www.chicagotribune.com/news/criminal-justice/ct-ald-daniel-solis-deferred-prosecution-agreement-burke-madigan-20220412-tnefkijdonf77k4m3y5crm4nt4-story.html"]
+        },
+        "sourceid": {
+            "$id": "#/properties/sourceid",
+            "type": "string",
+            "title": "The source id",
+            "description": "it seems to match content.source.source_id, if no match, set to empty string. (most likely is emptystring, since we do not use source_id for our article.",
+            "default": ""
+        },
+        "slug": {
+            "$id": "#/properties/slug",
+            "type": "string",
+            "title": "The slug",
+            "description": "match content.slug",
+            "examples": ["ct-ald-daniel-solis-deferred-prosecution-agreement-burke-madigan"]
+        },
+        "omniture": {
+            "$id": "#/properties/omniture",
+            "type": "object",
+            "title": "The omniture",
+            "description": "Tracking related attributes",
+            "required": [
+                "channel",
+                "contentAuthor",
+                "contentSource",
+                "contentType",
+                "pageName",
+                "contentCode",
+                "directory",
+                "keywords",
+                "printid",
+                "additionalProperties",
+                "screenType",
+                "numberOfChars"
+            ],
+            "properties": {
+                "channel": {
+                    "$id": "#/properties/omniture/properties/channel",
+                    "type": "string",
+                    "title": "The channel",
+                    "description": "The parent section path. Logic is same as sourcesection.",
+                    "examples": ["news"]
+                },
+                "contentAuthor": {
+                    "$id": "#/properties/omniture/properties/contentAuthor",
+                    "type": "string",
+                    "title": "The content Author",
+                    "description": "';'seprated string for name feild(content.credits.by[x].name)under content.credits.by array.",
+                    "default": "",
+                    "examples": ["JASON MEISNER; RAY LONG"]
+                },
+                "contentSource": {
+                    "$id": "#/properties/omniture/properties/contentSource",
+                    "type": "string",
+                    "title": "The content Source",
+                    "description": "Current article content source (content.source.name)",
+                    "examples": [ "Chicago Tribune"]
+                },
+                "contentType": {
+                    "$id": "#/properties/omniture/properties/contentType",
+                    "type": "string",
+                    "title": "The contentType",
+                    "description": "current article type. return 'article' if current type is story, else return type (content.type).",
+                    "examples": ["article"]
+                },
+                "pageName": {
+                    "$id": "#/properties/omniture/properties/pageName",
+                    "type": "string",
+                    "title": "The pageName",
+                    "description": "<channel>:<contentType> - - (content.publish_date in YYYYMMDD) - (content.headline slugifyed)",
+                    "examples": [ "news:article -  - 20220412 - after-three-years-under-wraps-ex-ald-daniel-solis-unprecedented-deal-with-the-feds-has-gone-public"]
+                },
+                "contentCode": {
+                    "$id": "#/properties/omniture/properties/contentCode",
+                    "type": "string",
+                    "title": "The content Code",
+                    "description": "content.content_restrictions.content_code , if no match default to empty string.",
+                    "default": ""
+                },
+                "directory": {
+                    "$id": "#/properties/omniture/properties/directory",
+                    "type": "string",
+                    "title": "The directory",
+                    "description": "Current article full section path. default to empty string if homesection.",
+                    "default": "",
+                    "examples": [ "/news/criminal-justice"]
+                },
+                "keywords": {
+                    "$id": "#/properties/omniture/properties/keywords",
+                    "type": "array",
+                    "title": "The keywords",
+                    "description": "Keyword arrary based on content.taxonomy.seo_keywords, if no match default to empty array.",
+                    "default": [],
+                    "additionalItems": true,
+                    "items": {
+                        "$id": "#/properties/omniture/properties/keywords/items"
+                    }
+                },
+                "printid": {
+                    "$id": "#/properties/omniture/properties/printid",
+                    "type": "string",
+                    "title": "The print id",
+                    "description": "based on content.additional_properties.newsgate_id, if no match default to empty string.",
+                    "default": ""
+                },
+                "additionalProperties": {
+                    "$id": "#/properties/omniture/properties/additionalProperties",
+                    "type": "object",
+                    "title": "The omoniture additionalProperties ",
+                    "description": "The omoniture additionalProperties ",
+                    "default": {},
+                    "required": [
+                        "sourceid",
+                        "slug",
+                        "directory",
+                        "keywords",
+                        "printid",
+                        "screenType",
+                        "numberOfChars"
+                    ],
+                    "properties": {
+                        "sourceid": {
+                            "$id": "#/properties/omniture/properties/additionalProperties/properties/sourceid",
+                            "type": "string",
+                            "title": "The sourceid schema",
+                            "description": "it seems to match content.source.source_id, if no match, set to empty string. (most likely is emptystring, since we do not use source_id for our article.",
+                            "default": ""
+                        },
+                        "slug": {
+                            "$id": "#/properties/omniture/properties/additionalProperties/properties/slug",
+                            "type": "string",
+                            "title": "The slug",
+                            "description": "current article slug. (content.slug)",
+                            "examples": ["ct-ald-daniel-solis-deferred-prosecution-agreement-burke-madigan"]
+                        },
+                        "directory": {
+                            "$id": "#/properties/omniture/properties/additionalProperties/properties/directory",
+                            "type": "string",
+                            "title": "The directory",
+                            "description": "Current article full section path. default to empty string if homesection.",
+                            "default": "",
+                            "examples": [ "/news/criminal-justice"]
+                        },
+                        "keywords": {
+                            "$id": "#/properties/omniture/properties/additionalProperties/properties/keywords",
+                            "type": "array",
+                            "title": "The keywords",
+                            "description": "Keyword arrary based on content.taxonomy.seo_keywords, if no match default to empty array.",
+                            "default": [],
+                            "additionalItems": true,
+                            "items": {
+                                "$id": "#/properties/omniture/properties/additionalProperties/properties/keywords/items"
+                            }
+                        },
+                        "printid": {
+                            "$id": "#/properties/omniture/properties/additionalProperties/properties/printid",
+                            "type": "string",
+                            "title": "The printid schema",
+                            "description": "based on content.additional_properties.newsgate_id, if no match default to empty string.",
+                            "default": ""
+                        },
+                        "screenType": {
+                            "$id": "#/properties/omniture/properties/additionalProperties/properties/screenType",
+                            "type": "string",
+                            "title": "The screenType",
+                            "description": "(content.additional_properties.content_item_type_code) if no match default to 'story'",
+                            "default": "story",
+                            "examples": [ "story"]
+                        },
+                        "leadartCredit": {
+                            "$id": "#/properties/omniture/properties/additionalProperties/properties/leadartCredit",
+                            "type": "string",
+                            "title": "The leadartCredit",
+                            "description": "';'seprated string for all content.promo_items.<lead_art||basic>.credits.by[x].name. we always take lead_art 1st, then basic. if no match do not disaply.",
+                            "optional": true,
+                            "examples": ["Nancy Stone/Chicago Tribune"]
+                        },
+                        "leadartSourceid": {
+                            "$id": "#/properties/omniture/properties/additionalProperties/properties/leadartSourceid",
+                            "type": "string",
+                            "title": "The leadart Sourceid",
+                            "description": "value is based on content.promo_items.<lead_art||basic>.source.source_id. lead_art or basic depend on leadartCredit selection, if no match display empty string if leadartCredit exist, else do not display. ",
+                            "optional": true,
+                            "examples": ["115588615"]
+                        },
+                        "numberOfChars": {
+                            "$id": "#/properties/omniture/properties/additionalProperties/properties/numberOfChars",
+                            "type": "integer",
+                            "title": "The numberOfChars",
+                            "description": "Number of char count in article body. default to 0 if not story type article.",
+                            "default": 0,
+                            "examples": [10161]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "screenType": {
+                    "$id": "#/properties/omniture/properties/screenType",
+                    "type": "string",
+                    "title": "The screenType schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "story"
+                    ]
+                },
+                "leadartCredit": {
+                    "$id": "#/properties/omniture/properties/leadartCredit",
+                    "type": "string",
+                    "title": "The leadartCredit",
+                    "description": "';'seprated string for all content.promo_items.<lead_art||basic>.credits.by[x].name. we always take lead_art 1st, then basic. if no match do not disaply.",
+                    "optional": true,
+                    "examples": ["Nancy Stone/Chicago Tribune"]
+                },
+                "leadartSourceid": {
+                    "$id": "#/properties/omniture/properties/leadartSourceid",
+                    "type": "string",
+                    "title": "The leadart Sourceid",
+                    "description": "value is based on content.promo_items.<lead_art||basic>.source.source_id. lead_art or basic depend on leadartCredit selection, if no match display empty string when leadartCredit exist, else do not display. ",
+                    "optional": true,
+                    "examples": ["115588615"]
+                },
+                "numberOfChars": {
+                    "$id": "#/properties/omniture/properties/numberOfChars",
+                    "type": "integer",
+                    "title": "The numberOfChars",
+                    "description": "Number of char count in article body. default to 0 if not story type article.",
+                    "default": 0,
+                    "examples": [10161]
+                }
+            },
+            "additionalProperties": true
+        },
+        "showdisplaydate": {
+            "$id": "#/properties/showdisplaydate",
+            "type": "boolean",
+            "title": "The showdisplaydate",
+            "description": "default to false. no usage in mobile",
+            "default": false
+        },
+        "publishedurl": {
+            "$id": "#/properties/publishedurl",
+            "type": "string",
+            "title": "The published url",
+            "description": "Same logic as contenturl.",
+            "examples": ["https://www.chicagotribune.com/news/criminal-justice/ct-ald-daniel-solis-deferred-prosecution-agreement-burke-madigan-20220412-tnefkijdonf77k4m3y5crm4nt4-story.html"]
+        },
+        "type": {
+            "$id": "#/properties/type",
+            "type": "string",
+            "title": "The article type",
+            "description": "current article type. return 'article' if current type is story, else return type (content.type).",
+            "examples": ["article"]
+        },
+        "id": {
+            "$id": "#/properties/id",
+            "type": "string",
+            "title": "The article id",
+            "description": "Current article id (content.id).",
+            "examples": [ "TNEFKIJDONF77K4M3Y5CRM4NT4"]
+        },
+        "lmt": {
+            "$id": "#/properties/lmt",
+            "type": "integer",
+            "title": "The lmt date",
+            "description": "iso format of content.last_updated_date ",
+            "examples": [1649802699174]
+        },
+        "shareurl": {
+            "$id": "#/properties/shareurl",
+            "type": "string",
+            "title": "The shareurl",
+            "description": "same logic as contenturl",
+            "examples": ["https://www.chicagotribune.com/news/criminal-justice/ct-ald-daniel-solis-deferred-prosecution-agreement-burke-madigan-20220412-tnefkijdonf77k4m3y5crm4nt4-story.html"]
+        },
+        "items": {
+            "$id": "#/properties/items",
+            "type": "array",
+            "title": "The items object. This only apply to article not photogallery type.",
+            "description": " This only apply to article not photogallery type.",
+            "additionalItems": true,
+            "optional":true,
+            "items": {
+                "$id": "#/properties/items/items",
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/photo",
+                        "description": "photo element for lead_art photo position and photo embeds."
+                    },
+                    {
+                        "$ref": "#/definitions/title",
+                        "description": "title element for current article. one element after lead_art "
+                    },
+                    {
+                        "$ref": "#/definitions/byline",
+                        "description": "byline element for current article. one element after title"
+                    },
+                    {
+                        "$ref": "#/definitions/date",
+                        "description": "date element for current article. one element after byline"
+                    },
+                    {
+                        "$ref": "#/definitions/paragraph",
+                        "description": "paragraph element for current article. one or more."
+                    },
+                    {
+                        "$ref": "#/definitions/bio",
+                        "description": "bio element for current article. at least one bio element before footer. if no bio info, a empty element required."
+                    },
+                    {
+                        "$ref": "#/definitions/footer",
+                        "description": "footer element for current article. one elment at end of items array."
+                    },
+                    {
+                        "$ref": "#/definitions/gallery",
+                        "description": "gallery element for current article leadart gallery and gallery embed."
+                    },
+                    {
+                        "$ref": "#/definitions/video",
+                        "description": "video element for current video article or story article leadart video and video embed."
+                    }
+                ]
+            }
+        },
+        "images": {
+            "$id": "#/properties/images",
+            "type": "array",
+            "title": "The images array..",
+            "description": "This apply to photogallery article.",
+            "additionalItems": true,
+            "optional":true,
+            "items": {
+                "$id": "#/properties/images/items",
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/photo",
+                        "description": "photo element for gallery. currentcontent is content.content_elements[x] "
+                    }
+                ]
+            }
+        },
+        "adkey": {
+            "$id": "#/properties/adkey",
+            "type": "string",
+            "title": "The adkey ",
+            "description": "current article full section path.",
+            "examples": ["/news/criminal-justice"]
+        },
+        "adProperties": {
+            "$id": "#/properties/adProperties",
+            "type": "object",
+            "title": "The adProperties ",
+            "description": "it is always empty object.",
+            "default": {}
+        },
+        "accessLevel": {
+            "$id": "#/properties/accessLevel",
+            "type": "string",
+            "title": "The accessLevel",
+            "description": "This value is based on pre-configured data match with content.content_restrictions.content_code. need mobile team input.",
+            "default": "",
+            "examples": [ "meteredThenPaid"]
+        }
+    },
+    "additionalProperties": true,
+    "definitions": {
+        "platforms": {
+            "$id": "#/definitions/platforms",
+            "type": "array",
+            "description": "always display as ['web', 'phone', 'tablet'].",
+            "examples": [
+                [
+                    "web",
+                    "phone",
+                    "tablet"
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/definitions/platforms/items",
+                "anyOf": [
+                    {
+                        "$id": "#/definitions/platforms/items/anyOf/0",
+                        "type": "string",
+                        "title": "The element in platforms",
+                        "description": "one of 'web', 'phone','table'.",
+                        "examples": ["web","phone"]
+                    }
+                ]
+            }
+        },
+        "photo":  {
+            "$id": "#/definitions/photo",
+            "type": "object",
+            "title": "Photo",
+            "description": "Data elment for leadart, photo embed and rawhtml youtube(logic defined later) with photo. for lead_art, the currenctcontent match content.promo.<leard_art||basic>, for photo embed the currentcontent math content.contentelements[x].type is 'image'",
+            "required": [
+                "blurb",
+                "credit",
+                "frompb",
+                "fullcaption",
+                "imageHeight",
+                "imageURL",
+                "imageWidth",
+                "instructions",
+                "isBright",
+                "message",
+                "padding",
+                "photographercredit",
+                "placement",
+                "platforms",
+                "socialImage",
+                "supressZoom",
+                "type",
+                "url",
+                "widthFactor",
+                "photoSourceid",
+                "additionalProperties"
+            ],
+            "properties": {
+                "blurb": {
+                    "$id": "#/definitions/photo/properties/blurb",
+                    "type": "string",
+                    "title": "The blurb",
+                    "description": "Photo caption(title). currentcontent.caption.",
+                    "default": "",
+                    "examples": [
+                        "Then-Ald. Daniel Solis attends a Chicago City Council meeting in 2014."
+                    ]
+                },
+                "credit": {
+                    "$id": "#/definitions/photo/properties/credit",
+                    "type": "string",
+                    "title": "The credit",
+                    "description": "no useage for this. always display empty string. mobile do not use it.",
+                    "default": ""
+                },
+                "frompb": {
+                    "$id": "#/definitions/photo/properties/frompb",
+                    "type": "boolean",
+                    "title": "The frompb ",
+                    "description": "no logic defined, default to false",
+                    "examples": [ false ]
+                },
+                "fullcaption": {
+                    "$id": "#/definitions/photo/properties/fullcaption",
+                    "type": "string",
+                    "title": "The fullcaption ",
+                    "description": "combine currentcontent.caption(strip html) and current content.credits.by[x].name(same logic as credit, uppercase), new line char between.",
+                    "examples": ["Then-Ald. Daniel Solis attends a Chicago City Council meeting in 2014.\nNANCY STONE/CHICAGO TRIBUNE"]
+                },
+                "imageHeight": {
+                    "$id": "#/definitions/photo/properties/imageHeight",
+                    "type": "integer",
+                    "title": "The imageHeight",
+                    "description": "currentcontent.height",
+                    "default": 0,
+                    "examples": [1109]
+                },
+                "imageURL": {
+                    "$id": "#/definitions/photo/properties/imageURL",
+                    "type": "string",
+                    "title": "The imageURL",
+                    "description": "currentcontent.url",
+                    "examples": [ "https://cloudfront-us-east-1.images.arcpublishing.com/tronc/OMJLKWKGUBC2NGVLR4UCTN44GA.jpg"]
+                },
+                "imageWidth": {
+                    "$id": "#/definitions/photo/properties/imageWidth",
+                    "type": "integer",
+                    "title": "The imageWidth",
+                    "description": "currentcontent.widith",
+                    "default": 0,
+                    "examples": [ 1973 ]
+                },
+                "instructions": {
+                    "$id": "#/definitions/photo/properties/instructions",
+                    "type": "string",
+                    "title": "The instructions",
+                    "description": "no logic find for this element, default to empty string. mobile do not use it",
+                    "default": ""
+                },
+                "isBright": {
+                    "$id": "#/definitions/photo/properties/isBright",
+                    "type": "boolean",
+                    "title": "The isBright",
+                    "description": "no logic find for this element. default to false",
+                    "default": false
+                },
+                "message": {
+                    "$id": "#/definitions/photo/properties/message",
+                    "type": "string",
+                    "title": "The message",
+                    "description": "always display as 'save-snapfish-data', mobile do not use it",
+                    "examples": ["save-snapfish-data" ]
+                },
+                "padding": {
+                    "$id": "#/definitions/photo/properties/padding",
+                    "type": "null",
+                    "title": "The padding",
+                    "description": "always display as null, mobile do not use it.",
+                    "default": null
+                },
+                "photographercredit": {
+                    "$id": "#/definitions/photo/properties/photographercredit",
+                    "type": "string",
+                    "title": "The photographercredit",
+                    "description": " ';'seprated string for all currentcontent.credits.by[x].name. default to empty string if no match.",
+                    "examples": ["Nancy Stone/Chicago Tribune"]
+                },
+                "placement": {
+                    "$id": "#/definitions/photo/properties/placement",
+                    "type": "string",
+                    "title": "The placement",
+                    "description": "alway display as 'center'",
+                    "examples": [ "center"]
+                },
+                "platforms": {
+                    "$ref": "#/definitions/platforms",
+                    "description": "platforms element."
+                },
+                "socialImage": {
+                    "$id": "#/definitions/photo/properties/socialImage",
+                    "type": "boolean",
+                    "title": "The socialImage",
+                    "description": "could not find logic. let's rendering false as default",
+                    "default": false
+                },
+                "supressZoom": {
+                    "$id": "#/definitions/photo/properties/supressZoom",
+                    "type": "boolean",
+                    "title": "The supressZoom",
+                    "description": "Always rendering as false.",
+                    "default": false
+                },
+                "type": {
+                    "$id": "#/definitions/photo/properties/type",
+                    "type": "string",
+                    "title": "The type",
+                    "description": "always render as 'image'",
+                    "default": "image"
+                },
+                "url": {
+                    "$id": "#/definitions/photo/properties/url",
+                    "type": "string",
+                    "title": "The url",
+                    "description": "always render as empty string.",
+                    "default": ""
+                },
+                "widthFactor": {
+                    "$id": "#/definitions/photo/properties/widthFactor",
+                    "type": "string",
+                    "title": "The widthFactor schema",
+                    "description": "always render as 'full-bleed'.",
+                    "default": "full-bleed"
+                },
+                "photoSourceid": {
+                    "$id": "#/definitions/photo/properties/photoSourceid",
+                    "type": "string",
+                    "title": "The photoSourceid ",
+                    "description": "currentcontent.source.source_id. if not match render as empty string.",
+                    "default": "",
+                    "examples": [ "115588615"]
+                },
+                "additionalProperties": {
+                    "$id": "#/definitions/photo/properties/additionalProperties",
+                    "type": "object",
+                    "title": "The additionalProperties schema",
+                    "description": "additionalPropterties for photo element",
+                    "required": [
+                        "photoSourceid"
+                    ],
+                    "properties": {
+                        "photoSourceid": {
+                            "$id": "#/definitions/photo/properties/additionalProperties/properties/photoSourceid",
+                            "type": "string",
+                            "title": "The photoSourceid",
+                            "description": "currentcontent.source.source_id. if not match render as empty string.",
+                            "default": "",
+                            "examples": ["115588615"]
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "gallery":  {
+            "$id": "#/definitions/gallery",
+            "type": "object",
+            "title": "the gallery element. currentcontent is content in gallery page, content.promo_items.lead_art for gallery lead art, content.content_elements[x] with type = gallery.",
+            "description": "the gallery element.",
+            "required": [
+                "blurb",
+                "title",
+                "placement",
+                "mime",
+                "platforms",
+                "type",
+                "widthFactor",
+                "contenturl",
+                "images",
+                "gallerySlug",
+                "galleryCredit",
+                "galleryOwner",
+                "gallerySource",
+                "gallerySourceid",
+                "additionalProperties"
+            ],
+            "properties": {
+                "blurb": {
+                    "$id": "#/definitions/gallery/properties/blurb",
+                    "type": "string",
+                    "title": "The gallery blurb",
+                    "description": "currentcontent.description.basic. if no match use currentcotnent.subheadlines.basic else render empty string. need unescape the text.",
+                    "default": "",
+                    "examples": [ "Lincoln College, founded in 1865, has seen its finances devastated by the pandemic and a ransomware attack. If a hefty donation doesn’t come soon, its fate will be sealed."]
+                },
+                "title": {
+                    "$id": "#/definitions/gallery/properties/title",
+                    "type": "string",
+                    "title": "The title",
+                    "description": "currentcontent.headlines.basic. if no match render empty string.",
+                    "default": "",
+                    "examples": ["Students hopeful for a miracle to save Lincoln College "]
+                },
+                "placement": {
+                    "$id": "#/definitions/gallery/properties/placement",
+                    "type": "string",
+                    "title": "The placement",
+                    "description": "always render as 'center'",
+                    "examples": [ "center"]
+                },
+                "mime": {
+                    "$id": "#/definitions/gallery/properties/mime",
+                    "type": "string",
+                    "title": "The mime type",
+                    "description": "always render as 'text/plain'",
+                    "examples": ["text/plain"]
+                },
+                "platforms": {
+                    "$ref": "#/definitions/platforms",
+                    "description": "platforms element."
+                },
+                "type": {
+                    "$id": "#/definitions/gallery/properties/type",
+                    "type": "string",
+                    "title": "The type",
+                    "description": "always render as 'gallery'",
+                    "examples": ["gallery"]
+                },
+                "widthFactor": {
+                    "$id": "#/definitions/gallery/properties/widthFactor",
+                    "type": "string",
+                    "title": "The widthFactor",
+                    "description": "always render as 'full-bleed'.",
+                    "examples": ["full-bleed" ]
+                },
+                "contenturl": {
+                    "$id": "#/definitions/gallery/properties/contenturl",
+                    "type": "string",
+                    "title": "The gallery contenturl",
+                    "description": "url is based on current market domain + currentcontent.websites[currentmarket].website_url, if no match, the whole element should be rendered.",
+                    "examples": ["https://www.chicagotribune.com/news/ct-viz-lincoln-college-photos-20220413-7i5hip7435ffpgj45h6bus5d2a-photogallery.html"]
+                },
+                "images": {
+                    "$id": "#/definitions/gallery/properties/images",
+                    "type": "array",
+                    "title": "The images",
+                    "description": "The images array.",
+                    "additionalItems": true,
+                    "items": {
+                        "$id": "#/definitions/gallery/properties/images/items",
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/photo",
+                                "description": "photo element for gallery. currentcontent is content.content_elements[x] "
+                            }
+                        ]
+                    }
+                },
+                "gallerySlug": {
+                    "$id": "#/definitions/gallery/properties/gallerySlug",
+                    "type": "string",
+                    "title": "The gallery Slug",
+                    "description": "currentcontent.slug",
+                    "examples": [ "ct-viz-lincoln-college-photos"]
+                },
+                "galleryCredit": {
+                    "$id": "#/definitions/gallery/properties/galleryCredit",
+                    "type": "string",
+                    "title": "The gallery Credit",
+                    "description": "',' seprated string to collect currentcontent.credites.by[x].name. if not match use currentcontent.additional_properties.credits.by[x].name, else use empty string.",
+                    "default": "",
+                    "examples": [ "Terrence Antonio James"]
+                },
+                "galleryOwner": {
+                    "$id": "#/definitions/gallery/properties/galleryOwner",
+                    "type": "string",
+                    "title": "The gallery Owner",
+                    "description": "currentcontent.additional_properties.playlist.owner. could not match this for our content. if not match render empty string.",
+                    "default": ""
+                },
+                "gallerySource": {
+                    "$id": "#/definitions/gallery/properties/gallerySource",
+                    "type": "string",
+                    "title": "The gallery Source",
+                    "description": "currentcontent.source.name, if no match render empty string.",
+                    "default": "",
+                    "examples": ["Chicago Tribune"]
+                },
+                "gallerySourceid": {
+                    "$id": "#/definitions/gallery/properties/gallerySourceid",
+                    "type": "string",
+                    "title": "The gallery Sourceid",
+                    "description": "currentcontent.source.source_id. if no match render empty string",
+                    "default": ""
+                },
+                "additionalProperties": {
+                    "$id": "#/definitions/gallery/properties/additionalProperties",
+                    "type": "object",
+                    "title": "The gallery additionalProperties",
+                    "description": "list of gallery additional properties.",
+                    "required": [
+                        "gallerySlug",
+                        "galleryCredit",
+                        "galleryOwner",
+                        "gallerySource",
+                        "gallerySourceid"
+                    ],
+                    "properties": {
+                        "gallerySlug": {
+                            "$id": "#/definitions/gallery/properties/additionalProperties/properties/gallerySlug",
+                            "type": "string",
+                            "title": "The gallery Slug",
+                            "description": "currentcontent.slug",
+                            "examples": [ "ct-viz-lincoln-college-photos"]
+                        },
+                        "galleryCredit": {
+                            "$id": "#/definitions/gallery/properties/additionalProperties/properties/galleryCredit",
+                            "type": "string",
+                            "title": "The gallery Credit",
+                            "description": "',' seprated string to collect currentcontent.credites.by[x].name. if not match use currentcontent.additional_properties.credits.by[x].name, else use empty string.",
+                            "default": "",
+                            "examples": [ "Terrence Antonio James"]
+                        },
+                        "galleryOwner": {
+                            "$id": "#/definitions/gallery/properties/additionalProperties/properties/galleryOwner",
+                            "type": "string",
+                            "title": "The gallery Owner",
+                            "description": "currentcontent.additional_properties.playlist.owner. could not match this for our content. if not match render empty string.",
+                            "default": ""
+                        },
+                        "gallerySource": {
+                            "$id": "#/definitions/gallery/properties/additionalProperties/properties/gallerySource",
+                            "type": "string",
+                            "title": "The gallery Source",
+                            "description": "currentcontent.source.name, if no match render empty string.",
+                            "default": "",
+                            "examples": ["Chicago Tribune"]
+                        },
+                        "gallerySourceid": {
+                            "$id": "#/definitions/gallery/properties/additionalProperties/properties/gallerySourceid",
+                            "type": "string",
+                            "title": "The gallery Sourceid",
+                            "description": "currentcontent.source.source_id. if no match render empty string",
+                            "default": ""
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        },
+        "title":  {
+            "$id": "#/definitions/title",
+            "type": "object",
+            "title": "title",
+            "description": "Data elmment for current article's title. it always rendering at top, after leadart if any.",
+            "required": [
+                "content",
+                "kicker",
+                "mime",
+                "platforms",
+                "type",
+                "size"
+            ],
+            "properties": {
+                "content": {
+                    "$id": "#/definitions/title/properties/content",
+                    "type": "string",
+                    "title": "The content headline",
+                    "description": "current aritle headline, content.headline.basic",
+                    "examples": [ "After three years under wraps, ex-Ald. Daniel Solis’ unprecedented deal with the feds has gone public "]
+                },
+                "kicker": {
+                    "$id": "#/definitions/title/properties/kicker",
+                    "type": "string",
+                    "title": "The kicker",
+                    "description": "always rendering as empty string",
+                    "default": ""
+                },
+                "mime": {
+                    "$id": "#/definitions/title/properties/mime",
+                    "type": "string",
+                    "title": "The mime type",
+                    "description": "if headline contain '</' then set as 'text/html', else set s 'text/plain'.",
+                    "examples": [ "text/plain"]
+                },
+                "platforms": {
+                    "$ref": "#/definitions/platforms",
+                    "description": "platforms element."
+                },
+                "type": {
+                    "$id": "#/definitions/title/properties/type",
+                    "type": "string",
+                    "title": "The type ",
+                    "description": "rendering as 'title'.",
+                    "examples": [ "title" ]
+                },
+                "size": {
+                    "$id": "#/definitions/title/properties/size",
+                    "type": "string",
+                    "title": "The size ",
+                    "description": "always render as '130'",
+                    "default": "130"
+                }
+            },
+            "additionalProperties": true
+        },
+        "byline":  {
+            "$id": "#/definitions/byline",
+            "type": "object",
+            "title": "byline element for current article",
+            "description": "Current article byline ",
+            "required": [
+                "content",
+                "kicker",
+                "mime",
+                "platforms",
+                "type"
+            ],
+            "properties": {
+                "content": {
+                    "$id": "#/definitions/byline/properties/content",
+                    "type": "string",
+                    "title": "The byline content",
+                    "description": "<br>upper(',' seprated string with each content.credits.by[x].name)</br>. if content.locaction exists then append '<br>upper(content.location)'. ",
+                    "default": "",
+                    "examples": ["<b>JASON MEISNER, RAY LONG</b>"]
+                },
+                "kicker": {
+                    "$id": "#/definitions/byline/properties/kicker",
+                    "type": "string",
+                    "title": "The kicker",
+                    "description": "always rendering as empty string",
+                    "default": ""
+                },
+                "mime": {
+                    "$id": "#/definitions/byline/properties/mime",
+                    "type": "string",
+                    "title": "The mime type",
+                    "description": "if byline contain '</' then set as 'text/html', else set s 'text/plain'. most likely, it is 'text/html'",
+                    "examples": [ "text/html"]
+                },
+                "platforms": {
+                    "$ref": "#/definitions/platforms",
+                    "description": "platforms element."
+                },
+                "type": {
+                    "$id": "#/definitions/byline/properties/type",
+                    "type": "string",
+                    "title": "The type",
+                    "description": "always render as 'byline'",
+                    "default": "byline"
+                }
+            },
+            "additionalProperties": true
+        },
+        "date": {
+            "$id": "#/definitions/date",
+            "type": "object",
+            "title": "The article date",
+            "description": "The current article date element. it always display after byline element.",
+            "required": [
+                "content",
+                "mime",
+                "type"
+            ],
+            "properties": {
+                "content": {
+                    "$id": "#/definitions/date/properties/content",
+                    "type": "integer",
+                    "title": "The date content",
+                    "description": "iso interger format of content.display_date",
+                    "examples": [1649799559301]
+                },
+                "mime": {
+                    "$id": "#/definitions/date/properties/mime",
+                    "type": "string",
+                    "title": "The mime",
+                    "description": "always render as 'text/plain'",
+                    "examples": ["text/plain"]
+                },
+                "type": {
+                    "$id": "#/definitions/date/properties/type",
+                    "type": "string",
+                    "title": "The type",
+                    "description": "always render as 'date'.",
+                    "default": "",
+                    "examples": ["date"]
+                }
+            },
+            "additionalProperties": true
+        },
+        "paragraph":  {
+            "$id": "#/definitions/paragraph",
+            "type": "object",
+            "title": "paragraph",
+            "description": "paragraph element for content.content_elements[x] item has type=text, correction, interstital embed. copyright(not sure the logic)",
+            "required": [
+                "content",
+                "mime",
+                "platforms",
+                "subtype",
+                "type"
+            ],
+            "properties": {
+                "content": {
+                    "$id": "#/definitions/paragraph/properties/content",
+                    "type": "string",
+                    "title": "The paragraph content",
+                    "description": "curentitem.content",
+                    "examples": [ "It was the day after Christmas 2018 when retiring Chicago Ald. Daniel Solis signed a secret agreement with federal prosecutors admitting to taking bribes from real estate developers in exchange for his help on zoning issues."]
+                },
+                "mime": {
+                    "$id": "#/definitions/paragraph/properties/mime",
+                    "type": "string",
+                    "description": "if headline contain '</' then set as 'text/html', else set s 'text/plain'.",
+                    "examples": [ "text/plain"]
+                },
+                "platforms": {
+                    "$ref": "#/definitions/platforms",
+                    "description": "platforms element."
+                },
+                "subtype": {
+                    "$id": "#/definitions/paragraph/properties/subtype",
+                    "type": "string",
+                    "title": "The subtype",
+                    "description": "always render as 'paragraph'",
+                    "examples": [ "paragraph"]
+                },
+                "type": {
+                    "$id": "#/definitions/paragraph/properties/type",
+                    "type": "string",
+                    "title": "The type",
+                    "description": "always render as 'sanitized_html'",
+                    "default": "",
+                    "examples": ["sanitized_html"]
+                }
+            },
+            "additionalProperties": true
+        },
+        "bio":  {
+            "$id": "#/definitions/bio",
+            "type": "object",
+            "title": "The bio element",
+            "description": "The current article bio element. based on content.credits.by array, each item in the array has one element.",
+            "required": [
+                "bio",
+                "name",
+                "platforms",
+                "role",
+                "type"
+            ],
+            "properties": {
+                "bio": {
+                    "$id": "#/definitions/bio/properties/bio",
+                    "type": "string",
+                    "title": "The bio",
+                    "description": "content.credits.by[x].bio, if no match rendering empty string. it should be empty for our content.",
+                    "default": ""
+                },
+                "name": {
+                    "$id": "#/definitions/bio/properties/name",
+                    "type": "string",
+                    "title": "The name",
+                    "description": "content.credits.by[x].name. if no match rendering empty string.",
+                    "default": "",
+                    "examples": [ "Jason Meisner"]
+                },
+                "platforms": {
+                    "$ref": "#/definitions/platforms",
+                    "description": "platforms element."
+                },
+                "role": {
+                    "$id": "#/definitions/bio/properties/role",
+                    "type": "string",
+                    "title": "The role",
+                    "description": "content.credits.by[x].role. if no match rendering empty string. it should be empty for our content.",
+                    "default": ""
+                },
+                "type": {
+                    "$id": "#/definitions/bio/properties/type",
+                    "type": "string",
+                    "title": "The type ",
+                    "description": "always render as 'author_info'.",
+                    "examples": [ "author_info" ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "footer":  {
+            "$id": "#/definitions/footer",
+            "type": "object",
+            "title": "The footer",
+            "description": "footer element.",
+            "required": [
+                "content",
+                "type",
+                "subtype",
+                "mime"
+            ],
+            "properties": {
+                "content": {
+                    "$id": "#/definitions/footer/properties/content",
+                    "type": "string",
+                    "title": "The content",
+                    "description": "always render based on following format '© <current year> <current market name>'.",
+                    "examples": [ "© 2022 Chicago Tribune" ]
+                },
+                "type": {
+                    "$id": "#/definitions/footer/properties/type",
+                    "type": "string",
+                    "title": "The type ",
+                    "description": "always render as 'sanitized_html'",
+                    "examples": [ "sanitized_html" ]
+                },
+                "subtype": {
+                    "$id": "#/definitions/footer/properties/subtype",
+                    "type": "string",
+                    "title": "The subtype",
+                    "description": "always rendering as 'paragraph'.",
+                    "examples": [ "paragraph"]
+                },
+                "mime": {
+                    "$id": "#/definitions/footer/properties/mime",
+                    "type": "string",
+                    "title": "The mime type",
+                    "description": "always render as 'text/html'.",
+                    "default": "",
+                    "examples": ["text/html"]
+                }
+            },
+            "additionalProperties": true
+        },
+        "video": {
+            "$id": "#/definitions/video",
+            "type": "object",
+            "title": "The video element",
+            "description": "video details for video detail page, video leadart, and video embed.",
+            "required": [
+                "blurb",
+                "title",
+                "fullcaption",
+                "credits",
+                "imageURL",
+                "contenturl",
+                "mediaURL",
+                "placement",
+                "platforms",
+                "prerollOnly",
+                "relatedVideos",
+                "host",
+                "shareurl",
+                "type",
+                "vertical",
+                "widthFactor",
+                "height",
+                "width",
+                "adconfig",
+                "videoSlug",
+                "videoCredit",
+                "videoOwner",
+                "videoSource",
+                "videoSourceid",
+                "videoClassification",
+                "additionalProperties"
+            ],
+            "properties": {
+                "blurb": {
+                    "$id": "#/definitions/video/properties/blurb",
+                    "type": "string",
+                    "title": "The blurb",
+                    "description": "current video description. currentcontent.description.basic if no match display empty string.",
+                    "default": "",
+                    "examples": [ "Tennis great Roger Federer greets fans in Millennium Park on Monday, March 19, 2018. <span class=\"st\">(Terrence Antonio James/Chicago Tribune)</span>"]
+                },
+                "title": {
+                    "$id": "#/definitions/video/properties/title",
+                    "type": "string",
+                    "title": "The title",
+                    "description": "currentcontent.headline.basic. if no match display empty string.",
+                    "default": "",
+                    "examples": [ "Roger Federer greets fans in Millennium Park" ]
+                },
+                "fullcaption": {
+                    "$id": "#/definitions/video/properties/fullcaption",
+                    "type": "string",
+                    "title": "The fullcaption",
+                    "description":"combine currentcontent.description.basic and current content.credits.by[x].name(same logic as credit, uppercase), new line char between.",
+                    "default": "",
+                    "examples": [ "Tennis great Roger Federer greets fans in Millennium Park on Monday, March 19, 2018. <span class=\"st\">(Terrence Antonio James/Chicago Tribune)</span>\nVIDEOLICIOUS - CHICAGO TRIBUNE" ]
+                },
+                "credits": {
+                    "$id": "#/definitions/video/properties/credits",
+                    "type": "string",
+                    "title": "The credits",
+                    "description": "no useage for this. always display empty string. mobile do not use it.",
+                    "default": ""
+                },
+                "imageURL": {
+                    "$id": "#/definitions/video/properties/imageURL",
+                    "type": "string",
+                    "title": "The imageURL",
+                    "description": "currentcontent.promo_items.url, if no match, use currentcontent.promo_items.basic.url. default to empty string.",
+                    "default": "",
+                    "examples": ["https://d3jj1xescvzl2o.cloudfront.net/06-01-2019/t_648a5d61b4294000a7c2a2d6150da7b6_name_ct_roger_federer_greets_fans_video_20180319"]
+                },
+                "contenturl": {
+                    "$id": "#/definitions/video/properties/contenturl",
+                    "type": "string",
+                    "title": "The content url",
+                    "description": "return url from selected item under currentcontent.streams which bitrate equal 600 and stream_type is 'mp4', if no match use bitrate 1200, if still no match, render empty string.",
+                    "default": "",
+                    "examples": [ "https://d3p33vdscqvyo9.cloudfront.net/tronc/Videolicious%20-%20Chicago%20Tribune/2018/03/19/5cf2baa146e0fb0009bf7335/5cf2bb8846e0fb00093efe98_1466504570141-s6zbhn_t_1559411597770_640_360_600.mp4"]
+                },
+                "mediaURL": {
+                    "$id": "#/definitions/video/properties/mediaURL",
+                    "type": "string",
+                    "title": "The media URL",
+                    "description": "same logic as contenturl above.",
+                    "default": "",
+                    "examples": [ "https://d3p33vdscqvyo9.cloudfront.net/tronc/Videolicious%20-%20Chicago%20Tribune/2018/03/19/5cf2baa146e0fb0009bf7335/5cf2bb8846e0fb00093efe98_1466504570141-s6zbhn_t_1559411597770_640_360_600.mp4"]
+                },
+                "placement": {
+                    "$id": "#/definitions/video/properties/placement",
+                    "type": "string",
+                    "title": "The placement",
+                    "description": "always display 'center'.",
+                    "default": "center"
+                },
+                "platforms": {
+                    "$ref": "#/definitions/platforms",
+                    "description": "platforms element."
+                },
+                "prerollOnly": {
+                    "$id": "#/definitions/video/properties/prerollOnly",
+                    "type": "boolean",
+                    "title": "The prerollOnly",
+                    "description": "always display 'true'.",
+                    "default": true
+                },
+                "relatedVideos": {
+                    "$id": "#/definitions/video/properties/relatedVideos",
+                    "type": "array",
+                    "title": "The related Videos",
+                    "description": "always display ['blurb': '', 'contenturl': '', 'id': 0].",
+                    "default":  [{"blurb": "", "contenturl": "", "id": 0}]
+                },
+                "host": {
+                    "$id": "#/definitions/video/properties/host",
+                    "type": "string",
+                    "title": "The host",
+                    "description": "always display 'posttv'.",
+                    "default": "posttv"
+                },
+                "shareurl": {
+                    "$id": "#/definitions/video/properties/shareurl",
+                    "type": "string",
+                    "title": "The shareurl",
+                    "description": "same logic as contenturl above.",
+                    "default": "",
+                    "examples": ["https://d3p33vdscqvyo9.cloudfront.net/tronc/Videolicious%20-%20Chicago%20Tribune/2018/03/19/5cf2baa146e0fb0009bf7335/5cf2bb8846e0fb00093efe98_1466504570141-s6zbhn_t_1559411597770_640_360_600.mp4"]
+                },
+                "type": {
+                    "$id": "#/definitions/video/properties/type",
+                    "type": "string",
+                    "title": "The type",
+                    "description": "always display 'video'.",
+                    "default": "video"
+                },
+                "vertical": {
+                    "$id": "#/definitions/video/properties/vertical",
+                    "type": "boolean",
+                    "title": "The vertical",
+                    "description": "always render as 'false'.",
+                    "default": false
+                },
+                "widthFactor": {
+                    "$id": "#/definitions/video/properties/widthFactor",
+                    "type": "string",
+                    "title": "The width Factor",
+                    "description": "always render as 'full-bleed'.",
+                    "default": "full-bleed"
+                },
+                "height": {
+                    "$id": "#/definitions/video/properties/height",
+                    "type": "integer",
+                    "title": "The height",
+                    "description": "height attribute from the same stream item used for contenturl.",
+                    "default": 0,
+                    "examples": [ 360 ]
+                },
+                "width": {
+                    "$id": "#/definitions/video/properties/width",
+                    "type": "integer",
+                    "title": "The width schema",
+                    "description": "width attribute from the same stream item used for contenturl.",
+                    "default": 0,
+                    "examples": [ 640]
+                },
+                "duration": {
+                    "$id": "#/definitions/video/properties/duration",
+                    "type": "integer",
+                    "title": "The duration",
+                    "description": "curentcontent.duration. if curentcontent.duration does not exist, do not display this element.",
+                    "optional": true,
+                    "examples": [55200]
+                },
+                "adconfig": {
+                    "$id": "#/definitions/video/properties/adconfig",
+                    "type": "object",
+                    "title": "The adconfig element",
+                    "description": "Video ad configuration attributes.",
+                    "required": [ 
+                        "commercialAdNode",
+                        "playAds",
+                        "enableAutoPreview",
+                        "forceAd",
+                        "autoPlayPreroll",
+                        "playVideoAds"
+                       
+                    ],
+                    "properties": {
+                        "commercialAdNode": {
+                            "$id": "#/definitions/video/properties/adconfig/properties/commercialAdNode",
+                            "type": "string",
+                            "title": "The commerical AdNode",
+                            "description": "currentcontent.websites[currentsite].website_section.path",
+                            "examples": ["news"]
+                        },
+                        "playAds": {
+                            "$id": "#/definitions/video/properties/adconfig/properties/playAds",
+                            "type": "boolean",
+                            "title": "The play Ads",
+                            "description": "always render as 'true'",
+                            "default": true
+                        },
+                        "enableAutoPreview": {
+                            "$id": "#/definitions/video/properties/adconfig/properties/enableAutoPreview",
+                            "type": "boolean",
+                            "title": "The enableAutoPreview",
+                            "description": "always render as 'true'",
+                            "default": true
+                        },
+                        "forceAd": {
+                            "$id": "#/definitions/video/properties/adconfig/properties/forceAd",
+                            "type": "boolean",
+                            "title": "The forceAd",
+                            "description": "always render as 'true'",
+                            "default": true
+                        },
+                        "autoPlayPreroll": {
+                            "$id": "#/definitions/video/properties/adconfig/properties/playAds",
+                            "type": "boolean",
+                            "title": "The autoPlayPreroll",
+                            "description": "always render as 'false'",
+                            "default": false
+                        },
+                        "playVideoAds": {
+                            "$id": "#/definitions/video/properties/adconfig/properties/playVideoAds",
+                            "type": "boolean",
+                            "title": "The playVideoAds",
+                            "description": "always render as 'true'",
+                            "default": true
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "videoSlug": {
+                    "$id": "#/definitions/video/properties/videoSlug",
+                    "type": "string",
+                    "title": "The videoSlug",
+                    "description": "currentcontent.slgu, if no match render empty string.",
+                    "default": "",
+                    "examples": [ "ct-roger-federer-greets-fans-video-20180319" ]
+                },
+                "videoCredit": {
+                    "$id": "#/definitions/video/properties/videoCredit",
+                    "type": "string",
+                    "title": "The videoCredit",
+                    "description": "always render as empty string.",
+                    "default": ""
+                },
+                "videoOwner": {
+                    "$id": "#/definitions/video/properties/videoOwner",
+                    "type": "string",
+                    "title": "The videoOwner schema",
+                    "description": "curtentcontent.additional_properties.playlist. the value need to translate to readable market name not code.",
+                    "default": "",
+                    "examples": [ "Chicago Tribune" ]
+                },
+                "videoSource": {
+                    "$id": "#/definitions/video/properties/videoSource",
+                    "type": "string",
+                    "title": "The videoSource",
+                    "description": "currentcontent.source.name",
+                    "default": "",
+                    "examples": [ "Videolicious - Chicago Tribune" ]
+                },
+                "videoSourceid": {
+                    "$id": "#/definitions/video/properties/videoSourceid",
+                    "type": "string",
+                    "title": "The videoSourceid",
+                    "description": "currentcontent.source.source_id.",
+                    "default": "",
+                    "examples": [ "96212284" ]
+                },
+                "videoClassification": {
+                    "$id": "#/definitions/video/properties/videoClassification",
+                    "type": "string",
+                    "title": "The videoClassification",
+                    "description": "curtentcontent.additional_properties.classification. if not match return empty string.",
+                    "default": ""
+                },
+                "additionalProperties": {
+                    "$id": "#/definitions/video/properties/additionalProperties",
+                    "type": "object",
+                    "title": "The additionalProperties schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "required": [
+                        "videoSlug",
+                        "videoCredit",
+                        "videoOwner",
+                        "videoSource",
+                        "videoSourceid",
+                        "videoClassification"
+                    ],
+                    "properties": {
+                        "videoSlug": {
+                            "$id": "#/definitions/video/properties/additionalProperties/properties/videoSlug",
+                            "type": "string",
+                            "title": "The videoSlug",
+                            "description": "currentcontent.slgu, if no match render empty string.",
+                            "default": "",
+                            "examples": [ "ct-roger-federer-greets-fans-video-20180319" ]
+                        },
+                        "videoCredit": {
+                            "$id": "#/definitions/video/properties/additionalProperties/properties/videoCredit",
+                            "type": "string",
+                            "title": "The videoCredit",
+                            "description": "always render as empty string.",
+                            "default": ""
+                        },
+                        "videoOwner": {
+                            "$id": "#/definitions/video/properties/additionalProperties/propertiesvideoOwner",
+                            "type": "string",
+                            "title": "The videoOwner schema",
+                            "description": "curtentcontent.additional_properties.playlist. the value need to translate to readable market name not code.",
+                            "default": "",
+                            "examples": [ "Chicago Tribune" ]
+                        },
+                        "videoSource": {
+                            "$id": "#/definitions/video/properties/additionalProperties/propertiesvideoSource",
+                            "type": "string",
+                            "title": "The videoSource",
+                            "description": "currentcontent.source.name",
+                            "default": "",
+                            "examples": [ "Videolicious - Chicago Tribune" ]
+                        },
+                        "videoSourceid": {
+                            "$id": "#/definitions/video/properties/additionalProperties/propertiesvideoSourceid",
+                            "type": "string",
+                            "title": "The videoSourceid",
+                            "description": "currentcontent.source.source_id.",
+                            "default": "",
+                            "examples": [ "96212284" ]
+                        },
+                        "videoClassification": {
+                            "$id": "#/definitions/video/properties/additionalProperties/propertiesvideoClassification",
+                            "type": "string",
+                            "title": "The videoClassification",
+                            "description": "curtentcontent.additional_properties.classification. if not match return empty string.",
+                            "default": ""
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        }
+    }
+}
