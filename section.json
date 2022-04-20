@@ -16,7 +16,7 @@
         "layout": {
             "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/layout",
             "type": "string",
-            "title": "The section layout code",
+            "title": "The section layout ",
             "description": "Section layout name/code in pagebuilder. Parsed but not used in mobile. ",
             "examples": ["3 Level Right Rail - Custom Block"]
         },
@@ -302,8 +302,8 @@
             "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/properties/checksum",
             "type": "string",
             "title": "The checksum code",
-            "description": "section content checksum code. it should be updated based on the feed content checksum. Used in Mobile.",
-            "examples": ["ad5740d2d9f3b71e9fbe86144174b0ff"]
+            "description": "based on mobile the latest comment, this is not required. set default to empty string.",
+            "default": ""
         }
     },
     "definitions": {
