@@ -692,7 +692,7 @@
                     "examples": ["lists/featured-story-list"]
                 },
                 "label": {
-                    "$ref": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/label",
+                    "$ref": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/chain/properties/label",
                     "description": "A label element.",
                     "optional": true
                 },
