@@ -1048,7 +1048,7 @@
                     "$id": "#/definitions/paragraph/properties/content",
                     "type": "string",
                     "title": "The paragraph content",
-                    "description": "curentitem.content. if type=header, content should wrap with <br> tag. if type=correction, content should wrap with <i> tag. if type=raw_html, we need strip html tags in content if iframe is not part of content. If content contains iframe, the element should render as 'interactive_content'. if type=interstitial_link, the output format should be <a href=\"[currentcontent.link]\">[currentcontent.content]</a>",
+                    "description": "curentitem.content. if type=header, content should wrap with <b> tag. if type=correction, content should wrap with <i> tag. if type=raw_html, we need strip html tags in content if iframe is not part of content. If content contains iframe, the element should render as 'interactive_content'. if type=interstitial_link, the output format should be <a href=\"[currentcontent.link]\">[currentcontent.content]</a>",
                     "examples": [ "It was the day after Christmas 2018 when retiring Chicago Ald. Daniel Solis signed a secret agreement with federal prosecutors admitting to taking bribes from real estate developers in exchange for his help on zoning issues."]
                 },
                 "mime": {
@@ -1738,7 +1738,7 @@
                             "$id": "#/definitions/youtube/properties/content/properties/thumbnail_height",
                             "type": "integer",
                             "title": "thumbnail_height",
-                            "description": "currentcontent.raw_oembed.thumbnail_url_height",
+                            "description": "currentcontent.raw_oembed.thumbnail_height",
                             "default": 0,
                             "examples": [360]
                         },
@@ -1746,7 +1746,7 @@
                             "$id": "#/definitions/youtube/properties/content/properties/thumbnail_width",
                             "type": "integer",
                             "title": "The thumbnail_width ",
-                            "description": "currentcontent.raw_oembed.thumbnail_url_width.",
+                            "description": "currentcontent.raw_oembed.thumbnail_width.",
                             "default": 0,
                             "examples": [ 480 ]
                         },
@@ -1860,7 +1860,6 @@
                 "content",
                 "mime",
                 "platforms",
-                "subtype",
                 "type",
                 "attribution",
                 "placement"
@@ -1888,14 +1887,15 @@
                     "$id": "#/definitions/quote/properties/subtype",
                     "type": "string",
                     "title": "The subtype",
-                    "description": "currentcontent.subtype",
+                    "description": "display this as currentcontent.subtype if currentcontent.subtype is not pullquote, pullquote do not require subtyope, do not display.",
+                    "optional": true,
                     "examples": [ "pullquote"]
                 },
                 "type": {
                     "$id": "#/definitions/quote/properties/type",
                     "type": "string",
                     "title": "The type",
-                    "description": "always render as 'quote'",
+                    "description": "display as 'pull_quote' if currentcontent.subtype is not pullquote; otherwise, always render as 'quote'",
                     "default": "",
                     "examples": ["quote"]
                 },
