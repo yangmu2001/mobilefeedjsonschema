@@ -368,7 +368,7 @@
                     "$id": "https://www.chicagotribune.com/arcio/classic-section/<section-path>/#/definitions/homepage-story/properties/border_bottom_style",
                     "type": "string",
                     "title": "The border_bottom_style",
-                    "description": "Always display as string 'hairline'.",
+                    "description": "Always display as string 'hairline', if items list does not contain 'secondary' sub_item_type; if so, render as 'none'.",
                     "default": "hairline"
                 },
                 "border_bottom_width": {
